@@ -1,37 +1,118 @@
 import { useState } from "react"
+import { Button, Dropdown, Space } from 'antd';
+
+const items = [
+  {
+    key: '1',
+    label: (
+      <span target="_blank">
+        1st menu item
+      </span>
+    ),
+  },
+  {
+    key: '2',
+    label: (
+      <span target="_blank">
+        2nd menu item
+      </span>
+    ),
+  }
+]
 
 export default function Header () {
-  const [openDropdown, setOpenDropdown] = useState(null);
-  const toggleDropdown = (index) => {
-    setOpenDropdown(openDropdown === index ? null : index);
-  };
+  const [searchOpend, setSearchOpend] = useState(false)
+
+  function handelClick (item) {
+    
+  }
   return (
     <>
       <div className="header">
         <div className="logo">
           <img className="logoImg"src="Logotype@2x.png" alt="logotype" width={181} height={27} />
           <div className="search">
-            <input type="search" placeholder="Search..." 
-            />
-            <img className="searchImg"src="searchSearch.png" alt="logotype" />
+            <input type="search" placeholder="Search..."  />
+            <Button>
+              <img className="searchImg"src="searchSearch.png" alt="logotype"  onClick={(e)=>{
+                
+              }}/>
+            </Button>
           </div>
         </div>
 
           <div className="menu">
             <ul className="navbar-list">
-              <li className="navbar-item"><b>Demos⋁</b>
-              {openDropdown === 1 && (
-            <ul className="dropdown">
-              <li><a href="#sub1">Submenu 1</a></li>
-              <li><a href="#sub2">Submenu 2</a></li>
-              <li><a href="#sub3">Submenu 3</a></li>
-            </ul>
-          )}
+              <li className="navbar-item">
+                <Space direction="vertical">
+                  <Space wrap>
+                    <Dropdown
+                      menu={{
+                        items,
+                      }}
+                      placement="bottomLeft"
+                    >
+                      <b>Demos⋁</b>
+                    </Dropdown>
+                  </Space>
+                </Space>    
               </li>
-              <li className="navbar-item"><b>Post⋁</b></li>
-              <li className="navbar-item"><b>Features⋁</b></li>
-              <li className="navbar-item"><b>Categories⋁</b></li>
-              <li className="navbar-item"><b>Shop⋁</b></li>
+              <li className="navbar-item">
+                <Space direction="vertical">
+                  <Space wrap>
+                    <Dropdown
+                      menu={{
+                        items,
+                      }}
+                      placement="bottomLeft"
+                    >
+                      <b>Demos⋁</b>
+                    </Dropdown>
+                  </Space>
+                </Space>    
+              </li>
+              <li className="navbar-item">
+                <Space direction="vertical">
+                  <Space wrap>
+                    <Dropdown
+                      menu={{
+                        items,
+                      }}
+                      placement="bottomLeft"
+                    >
+                      <b>Post⋁</b>
+                    </Dropdown>
+                  </Space>
+                </Space>    
+              </li>
+              <li className="navbar-item">
+                <Space direction="vertical">
+                  <Space wrap>
+                    <Dropdown
+                      menu={{
+                        items,
+                      }}
+                      placement="bottomLeft"
+                    >
+                      <b>Features⋁</b>
+                    </Dropdown>
+                  </Space>
+                </Space>    
+              </li>
+              <li className="navbar-item">
+                <Space direction="vertical">
+                  <Space wrap>
+                    <Dropdown
+                      menu={{
+                        items,
+                      }}
+                      placement="bottomLeft"
+                    >
+                      <b>Categories⋁</b>
+                    </Dropdown>
+                  </Space>
+                </Space>   
+              </li>
               <li className="navbar-item"><b>Buy Now</b></li>
             </ul>
           </div>

@@ -1,12 +1,23 @@
 import { useEffect, useState } from "react"
-import { data } from "../data/data"
-import request from "../request"
+import Popup from "./Popup";
 export default function Layout () {
+  const [text, setText] = useState("")
+
 
   const [BlogListData, setBlogListData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [activPost, setActivPost] = useState({})
+  const [BlogPopupOpened , setBlogPopupOpened]=useState(false);
 
+  const handlePopup = (e , item) =>{
+    // e.preventDefault();
+    // e.stopPropagation();
+    setActivPost(item);
+    setBlogPopupOpened(!BlogPopupOpened);
+    // document.body.classList.add('hidden');
+    console.log(1);
+  }
   useEffect(() => {
     async function fetchData () {
       try {
@@ -32,20 +43,29 @@ export default function Layout () {
     <div className="container">
       {BlogListData && BlogListData.map((item, ix)=>{
         return(
-          <div className="item" key={ix}>
-            <a href="/#" >
-              <img src={item.img}/>
-            </a>
-            <h4 key={ix} className="tags">
-              <b>{item.tags}</b>  
+          <div className="item" key={ix}
+            onClick={e => handlePopup(e , item)}
+          >
+            <img src={item.img}/>
+            <h4 className="tags">
+              <b>{item.tags}</b>
             </h4>
             <h3 className="title">{item.title}</h3>
-            <span className="autor">{item.autor}<span className="autor1">• {item.date} • {item.views} Views</span> </span>
-            <p className="autor1">{item.text}</p>          
+            <span className="autor">
+              {item.autor}
+              <span className="autor1">
+                • {item.date} • {item.views} Views
+              </span> 
+            </span>
+            <p className="autor1">{item.text}</p> 
+            <Popup
+              BlogPopupOpened = {BlogPopupOpened}
+              BlogListData = {BlogListData}
+              ix = {ix}
+              activPost = {activPost}
+            />         
           </div>
-
         )
-
       })}
     </div>
   );
